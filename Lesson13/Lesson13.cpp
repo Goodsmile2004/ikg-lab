@@ -1,10 +1,13 @@
-﻿#include <stdio.h>
+
+#include <stdio.h>
 #include <string.h>
 #include <assert.h>
 #include <math.h>
 #include <GL/glew.h>
 #include <GL/freeglut.h>
+
 #include "pipeline.h"
+
 #define WINDOW_WIDTH 1024
 #define WINDOW_HEIGHT 768
 
@@ -86,9 +89,9 @@ static void CreateVertexBuffer()
     Vertices[2] = Vector3f(1.0f, -1.0f, 0.5773f);
     Vertices[3] = Vector3f(0.0f, 1.0f, 0.0f);
 
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+ 	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
 }
 
 static void CreateIndexBuffer()
@@ -115,7 +118,7 @@ static void AddShader(GLuint ShaderProgram, const char* pShaderText, GLenum Shad
     const GLchar* p[1];
     p[0] = pShaderText;
     GLint Lengths[1];
-    Lengths[0] = strlen(pShaderText);
+    Lengths[0]= strlen(pShaderText);
     glShaderSource(ShaderObj, 1, p, Lengths);
     glCompileShader(ShaderObj);
     GLint success;
@@ -147,11 +150,11 @@ static void CompileShaders()
 
     glLinkProgram(ShaderProgram);
     glGetProgramiv(ShaderProgram, GL_LINK_STATUS, &Success);
-    if (Success == 0) {
-        glGetProgramInfoLog(ShaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
-        fprintf(stderr, "Error linking shader program: '%s'\n", ErrorLog);
+	if (Success == 0) {
+		glGetProgramInfoLog(ShaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
+		fprintf(stderr, "Error linking shader program: '%s'\n", ErrorLog);
         exit(1);
-    }
+	}
 
     glValidateProgram(ShaderProgram);
     glGetProgramiv(ShaderProgram, GL_VALIDATE_STATUS, &Success);
@@ -170,7 +173,7 @@ static void CompileShaders()
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
+    glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGBA);
     glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     glutInitWindowPosition(100, 100);
     glutCreateWindow("Tutorial 13");
@@ -180,8 +183,8 @@ int main(int argc, char** argv)
     // Must be done after glut is initialized!
     GLenum res = glewInit();
     if (res != GLEW_OK) {
-        fprintf(stderr, "Error: '%s'\n", glewGetErrorString(res));
-        return 1;
+      fprintf(stderr, "Error: '%s'\n", glewGetErrorString(res));
+      return 1;
     }
 
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);

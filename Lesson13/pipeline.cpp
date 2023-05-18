@@ -1,6 +1,7 @@
+
+
 #include "pipeline.h"
-#define _USE_MATH_DEFINES
-#include <cmath>
+
 
 const Matrix4f* Pipeline::GetTrans()
 {
@@ -16,4 +17,5 @@ const Matrix4f* Pipeline::GetTrans()
     m_transformation = PersProjTrans * CameraRotateTrans * CameraTranslationTrans * TranslationTrans * RotateTrans * ScaleTrans;
     return &m_transformation;
 }
+
 
